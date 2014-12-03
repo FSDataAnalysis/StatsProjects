@@ -1,0 +1,251 @@
+---
+title: "Logistic Regression"
+author: "S Santos"
+date: "Thursday, November 06, 2014"
+output: html_document
+---
+
+
+<font size="5">
+
+# Contents
+
+
+This program takes a set of categorical data and finds the two regression coefficients (theta0 and theta1) for de hypothesis:
+
+y= theta0 + theta*x
+
+where y is the output and x is the input.
+
+
+The :
+
+$latex 
+
+
+
+# INSTRUCTIONS: Full AM AFM code (2014)
+
+
+## The last version of this code can be found in:
+
+[here](https://github.com/FSDataAnalysis/AMAFMCodes)
+
+The folder to unzip is: **ForcesAMAFM2014NOV12.zip** 
+
+
+## There are versions that do procedures by parts:
+
+
+* For dFAD, work of adhesion, etc.:
+
+This code is to be employed when the figures are already produced and
+one wants only the statistics of dFAD, force of adhesion and work of adesion. 
+
+The code is [here](https://github.com/FSDataAnalysis/PROCESS_dFAD_FILES)
+
+With instructions [here](https://github.com/FSDataAnalysis/PROCESS_dFAD_FILES/blob/master/CodeStatsdFAD_2014Nov12.Rmd)
+
+
+* Preprocess files from a single txt file to multiple
+
+This code is to make multiple single files from a single txt file. 
+
+
+The code can be found [here](https://github.com/FSDataAnalysis/PreProcessFiles)
+
+## The previous simpler version can be found in:
+
+[here](https://github.com/FSDataAnalysis/CodeAMForces)
+
+## EXAMPLES of DATA:
+
+[here](https://github.com/FSDataAnalysis/ExamplesOfAMAFMdata)
+
+
+
+## What this code does:
+
+This code has been implemented in Matlab (versions prior to 2010 might not work) majorly by S Santos from November 2012 to November 2014 (santos_en@yahoo.com/fsdataanalysis@gmail.com) and by Karim Gadelrab (karimgadelrab@gmail.com) from June to August 2013. 
+
+
+This code will take raw amplitude versus distance curves and convert them into force and energy versus distance curves. Other infomration, i.e. different metrics, etc., are provided by the code as detailed in the papers cited below.
+
+One particular aim is to determine the height of the water film on the substrate's surface as described [here](http://scitation.aip.org/content/aip/journal/jcp/139/8/10.1063/1.4819267?showFTTab=true&containerItemId=content/aip/journal/jcp) and [here.](http://www.sciencedirect.com/science/article/pii/S0008622314008860)
+
+## USAGE
+
+
+### What is required:
+
+* This code requires that the user saves experimental amplitude versus distance curves in text files with tabulator separation.
+
+* The required vectores are:
+
+1. zc: Piezo displacement in meters.
+
+2. Def: mean cantilever eflection.
+
+3. Amp: Amplitude of oscillation in Volts (as in standard equipment): 
+
+4. Phase: Phase shift in degrees 0-180 (positive)
+
+
+* The vectors should be added to a txt file in the following form:
+
+ZEx =1 ; DfEx =3; ZRet = 4;  DfRet = 6; AEx =7 ;  ARet =8 ; PEx =9 ;  PRet =10;
+
+where Ex means Extension and Ret means retarction. 
+
+* Examples of such files can be found in the folder EXAMPLE_DATA.
+
+
+### How can I save my files?
+
+* The files have to be saved as txt files with tabulators acting as separators. However the files can be saved one by one, i.e. curve by curve, or many curves in the same file. 
+
+* If many curves are saved in the same file they should be saved one after the other in the format above. If many curves are saved in the same file you need to select the *option Process Files (0/1)=1*
+
+* If curves are saved one by one the option is *option Process Files (0/1)=0*
+
+* If the format is not correct you will have an error. The only other format accepted is that where the Cypher (Asulym Research) allows saving many files at once in a format where the first curve is as above and then the rows are zc, def and then Amplitude and Phase consecutively (shift example) 
+
+**Examples of accepted data can be found in the folder EXAMPLE_DATA**:
+
+In [this repository.](https://github.com/FSDataAnalysis/ExamplesOfAMAFMdata)
+
+### Where to place the raw files?
+
+The raw files should be palced directly in the folder **ADDFILES**. Only 
+one data set should be computed at a time.
+
+1. If txt files are placed in the folder with one curve at a time then 
+select option Process Files (0/1)=0.
+
+2. If a single txt file is placed in the folder with many curves at a time then select option Process Files (0/1)=1.
+
+- If the files are placed in the format specified above, consecutively, then select **Organize columns (0/1)=0** when prompted. 
+
+- If the files are placed in the alternative format, i.e. shift of Asylumn, then select **Organize columns (0/1)=0** when prompted. 
+
+
+### What the code does:
+
+* Other than processing the files, the main panel will ask you to select
+if you want to compute Edis (energy dissipation), Young Modulus, and/or FAD/Work AD. 
+
+* The above should be selected with 1 or deactivated with 0. 
+
+* The output of the files will be found in excel files in the main folder. 
+
+* An interpretation of the computation is not straight forward in all cases but literature is available with details. For example:
+
+* The procedures are partly based on the following works:
+
+- Information on metrics employed such as delta Force of Adhesion (dFAD):
+
+Amadei, C. A., Tang, T. C., Chiesa, M. & Santos, S. The aging of a surface and the evolution of conservative and dissipative nanoscale interactions. The Journal of Chemical Physics 139, 084708 (2013). [here](http://scitation.aip.org/content/aip/journal/jcp/139/8/10.1063/1.4819267?showFTTab=true&containerItemId=content/aip/journal/jcp)
+    
+- Information on other parameters such as Work of Adhesion:
+
+Tang, T.-C., Amadei, C. A., Thomson, N. H. & Chiesa, M. Ion Exchange and DNA Molecular Dip Sticks: Studying the Nanoscale Surface Wetting of Muscovite Mica. Journal of Physical Chemistry C 118, 4695-4701 (2014). [here](http://pubs.acs.org/doi/abs/10.1021/jp411125n)
+
+
+- Information on energy dissipation and general simulations versus experiment:
+
+Santos, S., Amadei, C. A., Verdaguer, A. & Chiesa, M. Size Dependent Transitions in Nanoscale Dissipation. Journal of Physical Chemistry C 117, 10615-10622 (2013). [here](http://pubs.acs.org/doi/abs/10.1021/jp4039732)
+
+Santos, S., Amadei, C. A., Tang, T.-C., Barcons, V. & Chiesa, M. Deconstructing the governing dissipative phenomena in the nanoscale. arXiv:1401.6587 [cond-mat.mes-hall] (2014).[here](Santos, S., Amadei, C. A., Tang, T.-C., Barcons, V. & Chiesa, M. Deconstructing the governing dissipative phenomena in the nanoscale. arXiv:1401.6587 [cond-mat.mes-hall] (2014).)
+
+
+## EXAMPLE
+
+**TEST**
+
+### MAIN PANEL: FILES and COMPUTATION
+
+1. To test the code place the file **Graphene_4_Arranged.txt** in the **ADDFILES** folder. This file can be found [here](https://github.com/FSDataAnalysis/ExamplesOfAMAFMdata)
+
+2. Run the main file **MainAMAFM2014Nov09.m** wih Matlab (no prior to 2010). 
+
+3. The file Graphene_4_Arranged.txt has 4 curves consecutively. Then the option Process Files (0/1)=1 is selected. 
+
+4. We leave all other possibilities to '1' in the main pannel since we want to calculate all. 
+
+### SECOND PANEL: cantilever parameters
+
+1. The second panel asks for spring constant k, Q factor Q and natural frequency. Here input k=44; Q=230, f0=344.598 kHz.
+
+2. If the Elastic modulus has to be calculated then we need to enter the tip radius. Here R=7 nm. For details on calculating **tip radius in situ** see [literature](http://scitation.aip.org/content/aip/journal/rsi/83/4/10.1063/1.4704376) Santos, S. et al. A method to provide rapid in situ determination of tip radius in dynamic atomic force microscopy. Review of Scientific Instruments 83, 043707-043717 (2012).
+
+3. The Amplitude In Volts should also be entered. Other parameters can be left as are. The smoothing coefficient is for teh force. If the Force fails to be smooth, increase or decrease this parameter, i.e. 0.01 (for very clean data) to 0.05 (for very noisy data).
+
+
+4. The subtract is for number of points to be removed. For noise data (end or begining of vectors) data points should be removed. 
+
+
+### THIRD PANEL: Processing raw files
+
+The third panel will be processing raw fies if the first option in main panel was 1. 
+
+1. The first option is to deal with extension or retarction of curves. 
+
+2. The second option will be 0 if the raw files are already in standard form like in this file, i.e. ZEx =1 ; DfEx =3; ZRet = 4;  DfRet = 6; AEx =7 ;  ARet =8 ; PEx =9 ;  PRet =10. Otherwise select 1. 
+
+
+
+
+### FOURTH PANEL: Metrics dFAD etc. 
+
+This panel lets you calculate the work of adhesion at two values, i.e. initial and end, and also dFAD. If you want to calculate more than two and/or other points, select **multiple references=1** and for number of points, 4 as an example. Now the metrics will be calculated at 0.05, 0.3, 0.55 and 0.8. 
+
+For information on the meaning see [here](http://scitation.aip.org/content/aip/journal/jcp/139/8/10.1063/1.4819267?showFTTab=true&containerItemId=content/aip/journal/jcp) and other literature as detailed above. 
+
+# OTHER DETAILS OF INTEREST
+
+
+## FAD, Work of adhesion, etc 
+
+* Get Statistic (Conservative part and optional):
+
+When the computation is finished the main curves are placed inside the tree folder **StatisticsAttractive\ION\DATA_FOLDER**
+ 
+This is done by running the FiguresProcessing.m instide Statistics for conservative data in long range:
+
+You will get a matrix, ResulrMat with three columns:
+
+* Fadhesion, i.e. related to chemical affinity and capilarity
+
+* Area under the curve, i.e. work required to separate tip from sample
+
+* The distance IncrFad, i.e. related to the height of water layers
+
+For details on, and definitions of, the meaning of the above parameters check:
+
+- [here](http://scitation.aip.org/content/aip/journal/jcp/139/8/10.1063/1.4819267?showFTTab=true&containerItemId=content/aip/journal/jcp)
+
+Amadei, C. A., Tang, T. C., Chiesa, M. & Santos, S. The aging of a surface and the evolution of conservative and dissipative nanoscale interactions. The Journal of Chemical Physics 139, 084708 (2013).
+
+- There is information on the meaning of the Area under the curve 
+[here](http://pubs.acs.org/doi/abs/10.1021/jp411125n)  
+  
+  
+Tang, T.-C., Amadei, C. A., Thomson, N. H. & Chiesa, M. Ion Exchange and DNA Molecular Dip Sticks: Studying the Nanoscale Surface Wetting of Muscovite Mica. Journal of Physical Chemistry C 118, 4695-4701 (2014).
+
+## Extra information on Energy dissipation, Virial and force of Adhesion
+
+In order to see what the mean and standard deiation of the data for the adhesion force, the energy dissipation (maxima),  virial (maxima), the 
+Virial (Joules) and Energy dissipated in eV coinciding with adhesion force location is run the file:
+
+AveragesVirial_Edis_Etc.m (**select Edis in main panel**)
+
+The data is stored in the variables **Adhesion_M**, **Edis_crop_M**,  **Virial_M**, **Virial_adhesion_M** and **Edis_adhesion_M**
+
+### **Elastic Modulus**:
+
+Run AveragesElasticity.m inside the Code_2014 folder
+This generates statistics also for Elastic Modulus.
+
+You will get a histogram and a box plot. 
+
+</font>
